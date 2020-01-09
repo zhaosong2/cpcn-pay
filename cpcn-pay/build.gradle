@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: "guru.stefma.bintrayrelease"
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.alibaba:fastjson:1.1.56.android'
+
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation project(path: ':alipaySdk-15.6.8-20191021122514')
+}
+
+group = 'com.cpcn.cpcn_pay_sdk'//jcenter上的路径
+version="1.0.0" //版本号
+
+publish {
+    userOrg = 'zhaosong'//bintray.com用户名
+    repoName = 'com.cpcn.cpcnpay'
+    artifactId = 'cpcn-pay'//项目名称
+    desc = 'CPCN Mobile Pay SDK'//描述
+    website = 'https://github.com/zhaosong/EasyPermission'//网站,尽量采用同样的格式
+//    website = 'https://www.cpcn.com.cn/'//网站,尽量采用同样的格式
+}
